@@ -1,8 +1,11 @@
 const express = require("express");
 const app = express();
+/**
+ * Eel módulo "path" de Node.js, que proporciona utilidades para trabajar con rutas de archivos y directorios.
+ */
 const path = require("path");
 
-const port = 3000;
+const PORT = process.env.PORT || 3001;
 
 /**
  * Middleware para servir archivos estáticos desde la carpeta "public"
@@ -13,36 +16,44 @@ app.use("/public-resource", express.static(path.join(__dirname, "public")));
 // Establece EJS como el motor de plantillas
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
+/**
+ * La función app.set() se utiliza para establecer la configuración de la aplicación, y en este caso,
+ * se establece la opción "views" con la ruta completa a la carpeta de vistas.
+ *  __dirname es una variable global de Node.js que representa la ruta del directorio actual del archivo en el que se encuentra.
+ * path.join() combina las partes de la ruta (en este caso, __dirname y "views") para obtener la ruta completa a la carpeta de vistas.
+ */
 
 app.get("/", (req, res) => {
   res.render("index", {
-    user,
-    sexo,
     rutaActual: "/",
   });
 });
 
-const user = {
-  firstName: "Tim",
-  lastName: "Cook",
+const infoUsuario = {
+  nombre: "urian",
+  apellido: "Viera",
+  profesion: "Developer",
   admin: true,
 };
 
-sexo = "Masculino";
 app.get("/informacion", (req, res) => {
   res.render("pages/informacion", {
-    user,
+    infoUsuario,
     rutaActual: "/informacion",
   });
 });
 
+let variable_lenguaje = "NodeJS";
 app.get("/perfil", (req, res) => {
   res.render("pages/perfil", {
-    user,
     rutaActual: "/perfil",
+    variable_lenguaje,
   });
 });
 
-app.listen(port, () => {
-  console.log(`App listening at port ${port}`);
+/**
+ * Arrancando nuestro servidor con Express
+ */
+app.listen(PORT, () => {
+  console.log(`App listening at port ${PORT}`);
 });
