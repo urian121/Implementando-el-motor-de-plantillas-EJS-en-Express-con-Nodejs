@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 /**
- * Eel módulo "path" de Node.js, que proporciona utilidades para trabajar con rutas de archivos y directorios.
+ * El módulo "path" de Node.js, que proporciona utilidades para trabajar con rutas de archivos y directorios.
  */
 const path = require("path");
 
